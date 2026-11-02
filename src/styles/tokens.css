@@ -1,0 +1,124 @@
+/* Mirrors the Figma variables (WEB code syntax). Mobile values on :root, then Tablet, Desktop. */
+:root {
+  --primitive-ink-950: #090213;
+  --primitive-ink-950-a60: #09021399;
+  --primitive-ink-900: #091929;
+  --primitive-navy-800: #0f345c;
+  --primitive-white-100: #ffffff;
+  --primitive-white-a80: #ffffffcc;
+  --primitive-white-a60: #ffffff99;
+  --primitive-white-a50: #ffffff80;
+  --primitive-white-a40: #ffffff66;
+  --primitive-white-a35: #ffffff59;
+  --primitive-white-a30: #ffffff4d;
+  --primitive-white-a15: #ffffff26;
+  --primitive-white-a10: #ffffff1a;
+  --primitive-white-a05: #ffffff0d;
+  --primitive-sky-300: #7cc4ff;
+  --primitive-sky-300-a80: #7cc4ffcc;
+  --primitive-sky-300-a15: #7cc4ff26;
+  --primitive-red-300: #ff8a8a;
+  --primitive-red-200: #ffb4b4;
+
+  --color-bg-page: var(--primitive-ink-950);
+  --color-bg-page-top: var(--primitive-ink-900);
+  --color-bg-glow: var(--primitive-navy-800);
+  --color-surface-glass: var(--primitive-white-a05);
+  --color-surface-glass-hover: var(--primitive-white-a10);
+  --color-surface-overlay: var(--primitive-ink-950-a60);
+  --color-surface-inverse: var(--primitive-white-100);
+  --color-surface-inverse-disabled: var(--primitive-white-a40);
+  --color-surface-divider: var(--primitive-white-a15);
+  --color-border-subtle: var(--primitive-white-a15);
+  --color-border-muted: var(--primitive-white-a30);
+  --color-border-default: var(--primitive-white-a50);
+  --color-border-strong: var(--primitive-white-100);
+  --color-border-accent: var(--primitive-sky-300-a80);
+  --color-border-error: var(--primitive-red-300);
+  --color-text-primary: var(--primitive-white-100);
+  --color-text-secondary: var(--primitive-white-a80);
+  --color-text-muted: var(--primitive-white-a60);
+  --color-text-subtle: var(--primitive-white-a50);
+  --color-text-inverse: var(--primitive-ink-950);
+  --color-text-accent: var(--primitive-sky-300);
+  --color-text-error: var(--primitive-red-200);
+  --color-icon-default: var(--primitive-white-100);
+  --color-icon-inverse: var(--primitive-ink-950);
+  --color-accent-default: var(--primitive-sky-300);
+  --color-accent-subtle: var(--primitive-sky-300-a15);
+  --color-molecule-bond: var(--primitive-white-a35);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-22: 48px;
+  --space-32: 64px;
+  --layout-content-width: 350px;
+  --layout-gutter: 20px;
+  --layout-section-gap: 48px;
+  --radius-sm: 16px;
+  --radius-md: 32px;
+  --radius-lg: 40px;
+  --radius-xl: 40px;
+  --radius-full: 999px;
+
+  --type-display: 64px;
+  --type-h1: 44px;
+  --type-h2: 36px;
+  --type-h3: 24px;
+  --type-body-l: 16px;
+  --type-body-m: 16px;
+  --type-body-s: 14px;
+  --type-caption: 12px;
+  --type-overline: 12px;
+
+  --font-serif: "IBM Plex Serif", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --glow-accent: 0 0 16px 2px var(--color-accent-default);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --space-22: 64px;
+    --space-32: 96px;
+    --layout-content-width: 672px;
+    --layout-gutter: 48px;
+    --layout-section-gap: 56px;
+    --radius-xl: 48px;
+    --type-display: 88px;
+    --type-h1: 64px;
+    --type-h2: 48px;
+    --type-h3: 30px;
+    --type-body-l: 20px;
+    --type-body-m: 18px;
+    --type-body-s: 16px;
+    --type-caption: 14px;
+    --type-overline: 13px;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --space-22: 88px;
+    --space-32: 128px;
+    --layout-content-width: 1186px;
+    --layout-gutter: 163px;
+    --layout-section-gap: 64px;
+    --radius-xl: 60px;
+    --type-display: 120px;
+    --type-h1: 96px;
+    --type-h2: 64px;
+    --type-h3: 36px;
+    --type-body-l: 24px;
+    --type-body-m: 20px;
+    --type-body-s: 16px;
+    --type-caption: 14px;
+    --type-overline: 14px;
+  }
+}

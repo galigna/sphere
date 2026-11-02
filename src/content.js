@@ -1,0 +1,58 @@
+export const SECTIONS = [
+  ['problem', 'The problem'],
+  ['how', 'How it works'],
+  ['prototypes', 'Prototypes'],
+  ['team', 'Team'],
+  ['goals', 'Our goals'],
+  ['contact', 'Contact'],
+]
+
+export const NAV = ['problem', 'how', 'team', 'contact']
+
+export const STEPS = [
+  ['Real data in', 'Any molecule from PubChem or a crystal structure file.'],
+  ['Puzzle out', 'One piece per atom, with pegs whose shapes match the bond type.'],
+  ['Students build it', 'They rebuild the molecule by hand and find its symmetry themselves.'],
+]
+
+// Photos still to come: add { src, alt } and the tile shows the image.
+export const PROTOTYPES = [{}, {}, {}, {}]
+
+export const TEAM = [
+  {
+    name: 'Mariia Novikova',
+    role: 'Co-founder & CEO',
+    bio: "Studies crystallography at Lake Forest College and takes part in MIT's MICRO program. Leads the science behind the project.",
+  },
+  {
+    name: 'Galina Ignatova',
+    role: 'Co-founder & CTO',
+    bio: 'ITMO University graduate. Wrote molkit, the software that turns molecules into puzzle pieces, and designs the kit and interactive UX.',
+  },
+]
+
+export const GOALS = [
+  {
+    when: 'Now',
+    title: 'Puzzle kits',
+    text: 'Symmetry, protein, MOF and General Chemistry kits. Being tested now; first classroom pilot at Lake Forest College.',
+    status: 'in testing',
+    active: true,
+  },
+  { when: 'Next', title: 'Learning platform', text: 'A website with quizzes, tutorials and background for each kit.', status: 'planned' },
+  { when: 'Later', title: 'AR app', text: 'Used beside the kit: animate an inversion step or show facts about the molecule.', status: 'future' },
+]
+
+const MOLKIT = 'https://github.com/galigna/rhino-molkit'
+const EMAIL = 'novikovamst18@lakeforest.edu'
+
+export const CONTACTS = [
+  { icon: 'mail', label: 'Email Mariia (CEO)', value: EMAIL, href: `mailto:${EMAIL}` },
+  { icon: 'code', label: 'molkit source code (GitHub)', value: 'galigna/rhino-molkit', href: MOLKIT },
+]
+
+export const PROJECT_LINKS = [
+  ['molkit on GitHub', MOLKIT],
+  ['Releases', `${MOLKIT}/releases`],
+  ['Email us', `mailto:${EMAIL}`],
+]
