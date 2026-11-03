@@ -26,6 +26,9 @@ export default function Footer() {
           <a href="https://github.com/galigna/rhino-molkit">molkit</a> (open source)
         </p>
       </div>
+      <div className="footer__wordmark" aria-hidden="true">
+        <span>Sphere</span>
+      </div>
     </footer>
   )
 }

@@ -59,24 +59,26 @@
   --space-16: 64px;
   --space-22: 48px;
   --space-32: 64px;
-  --layout-content-width: 350px;
-  --layout-gutter: 20px;
-  --layout-section-gap: 48px;
+  --layout-content-width: 342px;
+  --layout-gutter: 24px;
+  --layout-section-gap: 72px;
+  --layout-heading-gap: 16px;
+  --layout-text-width: 342px;
   --radius-sm: 16px;
   --radius-md: 32px;
   --radius-lg: 40px;
   --radius-xl: 40px;
   --radius-full: 999px;
 
-  --type-display: 64px;
-  --type-h1: 44px;
-  --type-h2: 36px;
-  --type-h3: 24px;
+  --type-display: 56px;
+  --type-h1: 36px;
+  --type-h2: 28px;
+  --type-h3: 22px;
   --type-body-l: 16px;
-  --type-body-m: 16px;
+  --type-body-m: 15px;
   --type-body-s: 14px;
   --type-caption: 12px;
-  --type-overline: 12px;
+  --type-overline: 11px;
 
   --font-serif: "IBM Plex Serif", Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -87,19 +89,21 @@
   :root {
     --space-22: 64px;
     --space-32: 96px;
-    --layout-content-width: 672px;
-    --layout-gutter: 48px;
-    --layout-section-gap: 56px;
+    --layout-content-width: 640px;
+    --layout-gutter: 64px;
+    --layout-section-gap: 96px;
+    --layout-heading-gap: 20px;
+    --layout-text-width: 640px;
     --radius-xl: 48px;
-    --type-display: 88px;
-    --type-h1: 64px;
-    --type-h2: 48px;
-    --type-h3: 30px;
-    --type-body-l: 20px;
-    --type-body-m: 18px;
-    --type-body-s: 16px;
-    --type-caption: 14px;
-    --type-overline: 13px;
+    --type-display: 72px;
+    --type-h1: 48px;
+    --type-h2: 34px;
+    --type-h3: 24px;
+    --type-body-l: 18px;
+    --type-body-m: 16px;
+    --type-body-s: 14px;
+    --type-caption: 13px;
+    --type-overline: 12px;
   }
 }
 
@@ -107,18 +111,20 @@
   :root {
     --space-22: 88px;
     --space-32: 128px;
-    --layout-content-width: 1186px;
-    --layout-gutter: 163px;
-    --layout-section-gap: 64px;
+    --layout-content-width: 1040px;
+    --layout-gutter: 236px;
+    --layout-section-gap: 120px;
+    --layout-heading-gap: 24px;
+    --layout-text-width: 680px;
     --radius-xl: 60px;
-    --type-display: 120px;
-    --type-h1: 96px;
-    --type-h2: 64px;
-    --type-h3: 36px;
-    --type-body-l: 24px;
-    --type-body-m: 20px;
-    --type-body-s: 16px;
-    --type-caption: 14px;
-    --type-overline: 14px;
+    --type-display: 88px;
+    --type-h1: 56px;
+    --type-h2: 40px;
+    --type-h3: 28px;
+    --type-body-l: 20px;
+    --type-body-m: 17px;
+    --type-body-s: 15px;
+    --type-caption: 13px;
+    --type-overline: 12px;
   }
 }

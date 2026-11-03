@@ -94,7 +94,7 @@ button, input {
 }
 
 /* Layout */
-.content, .header, .footer__top, .footer__bottom {
+.content, .header, .footer__top, .footer__bottom, .footer__wordmark {
   width: min(var(--layout-content-width), 100% - 2 * var(--layout-gutter));
   margin-inline: auto;
 }
@@ -109,10 +109,10 @@ button, input {
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--layout-heading-gap);
 }
-#problem {
-  gap: var(--space-3);
+.hero__text p, #problem p, .how__body {
+  max-width: var(--layout-text-width);
 }
 
 /* Shared bits */
@@ -266,7 +266,6 @@ button, input {
   flex-direction: column;
   align-items: center;
   gap: var(--space-8);
-  padding-bottom: var(--space-12);
 }
 .hero__viewer {
   max-width: 470px;
@@ -283,7 +282,7 @@ button, input {
 
 /* Tagline band */
 .tagline {
-  padding-block: var(--space-16);
+  padding-block: var(--space-12);
   text-align: center;
   background: radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, var(--color-bg-glow) 70%, transparent), transparent);
 }
@@ -295,7 +294,12 @@ button, input {
 .how__text {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--layout-heading-gap);
+}
+.how__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
 }
 .how__steps {
   list-style: decimal;
@@ -575,6 +579,18 @@ button, input {
   border-top: 1px solid var(--color-surface-divider);
   color: var(--color-text-subtle);
 }
+/* Fills the content width and runs off the page bottom, cut just under the baseline. */
+.footer__wordmark {
+  container-type: inline-size;
+}
+.footer__wordmark span {
+  display: block;
+  height: 0.8em;
+  overflow: hidden;
+  font: 700 29cqi / 1 var(--font-serif);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
 
 /* Tablet */
 @media (min-width: 768px) {
@@ -610,7 +626,7 @@ button, input {
 
 /* Desktop */
 @media (min-width: 1200px) {
-  .content, .header, .footer__top, .footer__bottom {
+  .content, .header, .footer__top, .footer__bottom, .footer__wordmark {
     width: min(var(--layout-content-width), 100% - 2 * var(--space-12));
   }
   .header {
@@ -629,15 +645,10 @@ button, input {
   .hero {
     flex-direction: row;
     gap: var(--space-22);
-    padding-bottom: var(--space-32);
   }
   .hero__viewer {
     flex: none;
     width: 470px;
-  }
-  .tagline {
-    padding-block: var(--space-32);
-    margin-block: calc(-1 * var(--layout-section-gap));
   }
   .how {
     flex-direction: row;

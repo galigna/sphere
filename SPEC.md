@@ -50,11 +50,16 @@ syntax, e.g. `color/text/primary` → `var(--color-text-primary)`.
 
 | | Mobile < 768 | Tablet 768–1199 | Desktop ≥ 1200 |
 |---|---|---|---|
-| Gutter | 20 | 48 | 163 |
-| Content width (max) | 350 | 672 | 1186 |
-| Section gap | 48 | 56 | 64 |
-| Display / H1 / H2 / H3 | 64 / 44 / 36 / 24 | 88 / 64 / 48 / 30 | 120 / 96 / 64 / 36 |
-| Body L / M / S | 16 / 16 / 14 | 20 / 18 / 16 | 24 / 20 / 16 |
+| Gutter | 24 | 64 | 236 |
+| Content width (max) | 342 | 640 | 1040 |
+| Section gap | 72 | 96 | 120 |
+| Heading → content gap | 16 | 20 | 24 |
+| Text width (max, paragraphs) | 342 | 640 | 680 |
+| Display / H1 / H2 / H3 | 56 / 36 / 28 / 22 | 72 / 48 / 34 / 24 | 88 / 56 / 40 / 28 |
+| Body L / M / S | 16 / 15 / 14 | 18 / 16 / 14 | 20 / 17 / 15 |
+
+The footer ends with a "Sphere" wordmark that fills the content width and is cut just under the
+baseline at the page bottom.
 
 Content is centred with `max-width: var(--layout-content-width)` and
 `padding-inline: var(--layout-gutter)`. Fixed frame widths are not reproduced.
