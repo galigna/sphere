@@ -270,6 +270,10 @@ button, input {
 .hero__viewer {
   max-width: 470px;
 }
+/* Tilts the spin axis along with the model; the ring stays inside the canvas's inner circle. */
+.hero__viewer .viewer__canvas {
+  rotate: 15deg;
+}
 .hero__text {
   display: flex;
   flex-direction: column;
@@ -395,7 +399,17 @@ button, input {
   scrollbar-width: none;
   border-radius: var(--radius-lg);
   /* Blur/Carousel edge: fade the right third instead of blurring live images. */
-  mask-image: linear-gradient(to right, #000 68%, transparent);
+  mask-image: linear-gradient(to right, #000 var(--fade), transparent calc(var(--fade) + 32%));
+  transition: --fade 0.8s ease;
+}
+.carousel--end {
+  --fade: 100%;
+}
+/* Registered so the gradient stop can animate; a mask-image swap can't. */
+@property --fade {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 68%;
 }
 .carousel .tile {
   flex: none;

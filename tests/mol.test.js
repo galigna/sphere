@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { ballStick } from '../src/mol/ballstick.js'
 import { formula } from '../src/mol/formula.js'
+import { mirrorPlane } from '../src/mol/mirror.js'
 import { LookupError, MESSAGES, loadMolecule } from '../src/mol/pubchem.js'
 import { parseSdf } from '../src/mol/sdf.js'
 
@@ -27,6 +28,17 @@ describe('parseSdf', () => {
 
   it('rejects non-molfiles', () => {
     expect(() => parseSdf('nope')).toThrow()
+  })
+})
+
+describe('mirrorPlane', () => {
+  it("finds a methane σd through C and two H's", () => {
+    const { atoms } = parseSdf(fixture('methane'))
+    const { normal, up } = mirrorPlane(atoms)
+    const c = atoms[0].pos
+    const offPlane = atoms.map((a) => Math.abs(a.pos.reduce((s, v, i) => s + (v - c[i]) * normal[i], 0)))
+    expect(offPlane.filter((d) => d < 0.01)).toHaveLength(3)
+    expect(Math.abs(up.reduce((s, v, i) => s + v * normal[i], 0))).toBeLessThan(1e-9)
   })
 })
 

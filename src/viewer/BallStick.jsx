@@ -40,7 +40,7 @@ export default function BallStick({ molecule, pieces, instant }) {
         <Material />
       </instancedMesh>
       <instancedMesh key={`s${spec.sticks.length}`} ref={sticks} args={[null, null, spec.sticks.length]}>
-        <cylinderGeometry args={[1, 1, 1, 24, 1, true]} />
+        <cylinderGeometry args={[1, 1, 1, 24]} />
         <Material />
       </instancedMesh>
     </group>

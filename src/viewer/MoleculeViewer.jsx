@@ -1,18 +1,25 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { BufferGeometry, PMREMGenerator, Vector3 } from 'three'
+import { BufferGeometry, Matrix4, PMREMGenerator, Quaternion, Vector3 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 import { ballStick } from '../mol/ballstick.js'
+import { mirrorPlane } from '../mol/mirror.js'
 import BallStick, { EXPLODE } from './BallStick.jsx'
 
 const FOV = 30
 const KEY_STEP = Math.PI / 16
+const RING = 1.25
+const TILT_RETURN = 0.8 // per second
+// The camera looks down a little, so the molecule doesn't sit dead-on.
+const ELEVATION = 0.18
+const REST_POLAR = Math.PI / 2 - ELEVATION
 
 export default function MoleculeViewer({ molecule, pieces = false, ring = false, paused, reducedMotion }) {
   const box = useRef()
   const [visible, setVisible] = useState(true)
   const { radius } = useMemo(() => ballStick(molecule), [molecule])
+  const orientation = useMemo(() => (ring ? onMirror(molecule) : new Quaternion()), [molecule, ring])
 
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting))
@@ -20,21 +27,26 @@ export default function MoleculeViewer({ molecule, pieces = false, ring = false,
     return () => io.disconnect()
   }, [])
 
-  // Fit the bounding sphere, with room for the exploded pieces.
-  const distance = ((radius + (pieces ? EXPLODE : 0)) * 1.2) / Math.sin(((FOV / 2) * Math.PI) / 180)
+  // Fit the bounding sphere, with room for the exploded pieces and the ring.
+  const extent = Math.max(radius + (pieces ? EXPLODE : 0), ring ? radius * RING : 0)
+  const distance = (extent * 1.15) / Math.sin(((FOV / 2) * Math.PI) / 180)
 
   return (
     <div ref={box} className="viewer__canvas">
       <Canvas
         frameloop={visible ? 'always' : 'never'}
         dpr={[1, 2]}
-        camera={{ fov: FOV, position: [0, 0, distance] }}
+        // The hero canvas is CSS-rotated; measure its layout size, not its rotated bounding box.
+        resize={{ offsetSize: true }}
+        camera={{ fov: FOV, position: [0, Math.sin(ELEVATION), Math.cos(ELEVATION)] }}
         gl={{ alpha: true, antialias: true }}
       >
         <Environment />
         <Camera distance={distance} />
-        <BallStick molecule={molecule} pieces={pieces} instant={reducedMotion} />
-        {ring && <Ring radius={radius * 1.25} />}
+        <group quaternion={orientation}>
+          <BallStick molecule={molecule} pieces={pieces} instant={reducedMotion} />
+        </group>
+        {ring && <Ring radius={radius * RING} />}
         <Controls autoRotate={!paused && !reducedMotion} />
       </Canvas>
     </div>
@@ -60,17 +72,28 @@ function Camera({ distance }) {
   return null
 }
 
-// The dashed orbit from the Figma hero.
+// Turn a mirror plane onto the XY plane (where the ring lies), with its in-plane atom
+// pointing up the spin axis.
+function onMirror(molecule) {
+  const plane = mirrorPlane(molecule.atoms)
+  if (!plane) return new Quaternion()
+  const n = new Vector3(...plane.normal)
+  const up = new Vector3(...plane.up)
+  const x = new Vector3().crossVectors(up, n)
+  return new Quaternion().setFromRotationMatrix(new Matrix4().makeBasis(x, up, n).transpose())
+}
+
+// The dashed ring is the rim of a mirror plane, as molkit draws them.
 function Ring({ radius }) {
   const geometry = useMemo(() => {
     const points = Array.from({ length: 129 }, (_, i) => {
       const a = (i / 128) * Math.PI * 2
-      return new Vector3(Math.cos(a) * radius, 0, Math.sin(a) * radius)
+      return new Vector3(Math.cos(a) * radius, Math.sin(a) * radius, 0)
     })
     return new BufferGeometry().setFromPoints(points)
   }, [radius])
   return (
-    <line geometry={geometry} rotation={[0.18, 0, 0.12]} onUpdate={(l) => l.computeLineDistances()}>
+    <line geometry={geometry} onUpdate={(l) => l.computeLineDistances()}>
       <lineDashedMaterial color="white" transparent opacity={0.35} dashSize={0.12} gapSize={0.1} />
     </line>
   )
@@ -85,7 +108,10 @@ function Controls({ autoRotate }) {
   }, [camera, gl])
   controls.autoRotate = autoRotate
 
-  useFrame((_, dt) => controls.update(dt))
+  useFrame((_, dt) => {
+    // Ease the tilt back to the starting view while auto-rotating.
+    if (autoRotate) controls.rotateUp((controls.getPolarAngle() - REST_POLAR) * Math.min(1, dt * TILT_RETURN))
+    controls.update(dt)  })
 
   useEffect(() => {
     const el = gl.domElement.closest('.viewer')

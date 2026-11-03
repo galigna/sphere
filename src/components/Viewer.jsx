@@ -50,7 +50,8 @@ export default function Viewer({ molecule, pieces, ring, label, className = '' }
       tabIndex={0}
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
-      onFocus={() => setFocus(true)}
+      // A drag focuses the viewer too; only keyboard focus should keep it paused.
+      onFocus={(e) => setFocus(e.currentTarget.matches(':focus-visible'))}
       onBlur={() => setFocus(false)}
     >
       {near && molecule && (

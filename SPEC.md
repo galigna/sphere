@@ -169,7 +169,9 @@ The model looks like the printed puzzle, not a generic chemistry viewer:
   draw calls.
 - Glossy `meshPhysicalMaterial` with clearcoat, lit by a `RoomEnvironment` PMREM generated at
   runtime (no HDR download) to match the Figma render. No shadows.
-- The dashed orbit ring under the hero molecule is a `LineDashed` ellipse.
+- The dashed ring around the hero molecule is the rim of a mirror plane (methane's σd, through C and two
+  H's), found with molkit's method: a mirror's normal is the difference of two like atoms. The molecule
+  is turned so this plane holds the spin axis, along its in-plane C–H bond.
 - The model is centred on its centroid, and the camera distance fits its bounding sphere.
 
 ### 6.5 "One piece per atom": the puzzle moment

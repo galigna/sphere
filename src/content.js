@@ -16,7 +16,7 @@ export const STEPS = [
 ]
 
 // Photos still to come: add { src, alt } and the tile shows the image.
-export const PROTOTYPES = [{}, {}, {}, {}]
+export const PROTOTYPES = [{}, {}, {}, {}, {}, {}, {}]
 
 export const TEAM = [
   {
