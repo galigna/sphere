@@ -34,7 +34,7 @@ class NoWebGL extends Component {
   }
 }
 
-export default function Viewer({ molecule, pieces, ring, label, className = '' }) {
+export default function Viewer({ molecule, pieces, symmetry, label, interactive = true, className = '' }) {
   const ref = useRef()
   const near = useNear(ref)
   const reducedMotion = useReducedMotion()
@@ -44,10 +44,10 @@ export default function Viewer({ molecule, pieces, ring, label, className = '' }
   return (
     <div
       ref={ref}
-      className={`viewer ${className}`}
+      className={`viewer ${interactive ? '' : 'viewer--static'} ${className}`}
       role="img"
       aria-label={label}
-      tabIndex={0}
+      tabIndex={interactive ? 0 : undefined}
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
       // A drag focuses the viewer too; only keyboard focus should keep it paused.
@@ -60,16 +60,18 @@ export default function Viewer({ molecule, pieces, ring, label, className = '' }
             <MoleculeViewer
               molecule={molecule}
               pieces={pieces}
-              ring={ring}
+              symmetry={symmetry}
               paused={hover || focus}
               reducedMotion={reducedMotion}
             />
           </Suspense>
         </NoWebGL>
       )}
-      <span className="viewer__hint" aria-hidden="true">
-        <Icon name="rotate" /> drag to rotate
-      </span>
+      {interactive && (
+        <span className="viewer__hint" aria-hidden="true">
+          <Icon name="rotate" /> drag to rotate
+        </span>
+      )}
     </div>
   )
 }

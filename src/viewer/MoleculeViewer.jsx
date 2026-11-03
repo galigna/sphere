@@ -4,7 +4,7 @@ import { BufferGeometry, Matrix4, PMREMGenerator, Quaternion, Vector3 } from 'th
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 import { ballStick } from '../mol/ballstick.js'
-import { mirrorPlane } from '../mol/mirror.js'
+import { mirrorPlanes, principalAxes } from '../mol/symmetry.js'
 import BallStick, { EXPLODE } from './BallStick.jsx'
 
 const FOV = 30
@@ -15,11 +15,11 @@ const TILT_RETURN = 0.8 // per second
 const ELEVATION = 0.18
 const REST_POLAR = Math.PI / 2 - ELEVATION
 
-export default function MoleculeViewer({ molecule, pieces = false, ring = false, paused, reducedMotion }) {
+export default function MoleculeViewer({ molecule, pieces = false, symmetry = false, paused, reducedMotion }) {
   const box = useRef()
   const [visible, setVisible] = useState(true)
   const { radius } = useMemo(() => ballStick(molecule), [molecule])
-  const orientation = useMemo(() => (ring ? onMirror(molecule) : new Quaternion()), [molecule, ring])
+  const orientation = useMemo(() => (symmetry ? onMirror(molecule) : new Quaternion()), [molecule, symmetry])
 
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting))
@@ -27,8 +27,8 @@ export default function MoleculeViewer({ molecule, pieces = false, ring = false,
     return () => io.disconnect()
   }, [])
 
-  // Fit the bounding sphere, with room for the exploded pieces and the ring.
-  const extent = Math.max(radius + (pieces ? EXPLODE : 0), ring ? radius * RING : 0)
+  // Fit the bounding sphere, with room for the exploded pieces and the symmetry elements.
+  const extent = Math.max(radius + (pieces ? EXPLODE : 0), symmetry ? radius * RING : 0)
   const distance = (extent * 1.15) / Math.sin(((FOV / 2) * Math.PI) / 180)
 
   return (
@@ -45,8 +45,9 @@ export default function MoleculeViewer({ molecule, pieces = false, ring = false,
         <Camera distance={distance} />
         <group quaternion={orientation}>
           <BallStick molecule={molecule} pieces={pieces} instant={reducedMotion} />
+          {symmetry && <Planes molecule={molecule} radius={radius * RING} />}
+          {symmetry && <Axes molecule={molecule} length={radius * RING} />}
         </group>
-        {ring && <Ring radius={radius * RING} />}
         <Controls autoRotate={!paused && !reducedMotion} />
       </Canvas>
     </div>
@@ -72,10 +73,9 @@ function Camera({ distance }) {
   return null
 }
 
-// Turn a mirror plane onto the XY plane (where the ring lies), with its in-plane atom
-// pointing up the spin axis.
+// Turn a mirror plane onto the screen, with its in-plane atom pointing up the spin axis.
 function onMirror(molecule) {
-  const plane = mirrorPlane(molecule.atoms)
+  const plane = mirrorPlanes(molecule.atoms).find((p) => p.up)
   if (!plane) return new Quaternion()
   const n = new Vector3(...plane.normal)
   const up = new Vector3(...plane.up)
@@ -83,8 +83,8 @@ function onMirror(molecule) {
   return new Quaternion().setFromRotationMatrix(new Matrix4().makeBasis(x, up, n).transpose())
 }
 
-// The dashed ring is the rim of a mirror plane, as molkit draws them.
-function Ring({ radius }) {
+// Each mirror plane is drawn by its dashed rim, as molkit draws them.
+function Planes({ molecule, radius }) {
   const geometry = useMemo(() => {
     const points = Array.from({ length: 129 }, (_, i) => {
       const a = (i / 128) * Math.PI * 2
@@ -92,10 +92,33 @@ function Ring({ radius }) {
     })
     return new BufferGeometry().setFromPoints(points)
   }, [radius])
-  return (
-    <line geometry={geometry} onUpdate={(l) => l.computeLineDistances()}>
+  const turns = useMemo(
+    () =>
+      mirrorPlanes(molecule.atoms).map(({ normal }) =>
+        new Quaternion().setFromUnitVectors(new Vector3(0, 0, 1), new Vector3(...normal)),
+      ),
+    [molecule],
+  )
+  return turns.map((q, i) => (
+    <line key={i} geometry={geometry} quaternion={q} onUpdate={(l) => l.computeLineDistances()}>
       <lineDashedMaterial color="white" transparent opacity={0.35} dashSize={0.12} gapSize={0.1} />
     </line>
+  ))
+}
+
+// The highest-order rotation axes, as thin lines through the centre that reach the ring.
+function Axes({ molecule, length }) {
+  const geometry = useMemo(() => {
+    const ends = principalAxes(molecule.atoms).flatMap((k) => {
+      const v = new Vector3(...k).multiplyScalar(length)
+      return [v.clone().negate(), v]
+    })
+    return new BufferGeometry().setFromPoints(ends)
+  }, [molecule, length])
+  return (
+    <lineSegments geometry={geometry}>
+      <lineBasicMaterial color="white" transparent opacity={0.35} />
+    </lineSegments>
   )
 }
 

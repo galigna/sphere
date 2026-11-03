@@ -19,7 +19,7 @@ Source of truth for layout and copy: Figma file `sr9U4FBdxBzHXYZVrpBRLh` ("Landi
 - The page as designed: header, hero, The problem, How it works, Physical prototypes, Team,
   Our goals, Contact, footer.
 - Two live 3D viewers built with **Three.js**:
-  - **Hero:** methane, slowly rotating, draggable.
+  - **Hero:** methane, slowly rotating on its own; not draggable, no "drag to rotate" hint.
   - **How it works:** the molecule demo (§6).
 - Responsive at three breakpoints driven by the design tokens (§4).
 - Static build deployed by GitHub Actions.
@@ -174,9 +174,13 @@ The model looks like the printed puzzle, not a generic chemistry viewer:
   draw calls.
 - Glossy `meshPhysicalMaterial` with clearcoat, lit by a `RoomEnvironment` PMREM generated at
   runtime (no HDR download) to match the Figma render. No shadows.
-- The dashed ring around the hero molecule is the rim of a mirror plane (methane's σd, through C and two
-  H's), found with molkit's method: a mirror's normal is the difference of two like atoms. The molecule
-  is turned so this plane holds the spin axis, along its in-plane C–H bond.
+- The dashed rings around the hero molecule are the rims of its mirror planes (methane's six σd, each
+  through C and two H's, so each holds two C₃ axes), found with molkit's method: a mirror's normal is
+  the difference of two like atoms. The molecule is turned so the first plane faces the camera and holds
+  the spin axis, along its in-plane C–H bond.
+- Thin lines out to the rings mark the highest-order rotation axes (methane's four C₃, one along each
+  C–H). An axis runs through an atom or the midpoint of two like atoms; the highest order that maps the
+  molecule onto itself wins. Both finders live in `src/mol/symmetry.js`.
 - The model is centred on its centroid, and the camera distance fits its bounding sphere.
 
 ### 6.5 "One piece per atom": the puzzle moment
@@ -240,6 +244,6 @@ Meta:
 3. Typing `methane`, `caffeine` or `aspirin` loads the model from PubChem. `notamolecule` shows
    the Error state. An offline network shows the PubChem error, and the preset chips still work.
 4. Pieces explodes and reassembles the molecule. The caption shows the formula and piece count.
-5. The hero rotates and stops on hover. Reduced motion stops all auto-rotation.
+5. The hero rotates and ignores the pointer. Reduced motion stops all auto-rotation.
 6. The viewer's unit tests pass in CI.
 7. Nothing from the private list in §3 appears in the repo or on the page.

@@ -232,6 +232,12 @@ button, input {
 .viewer:active {
   cursor: grabbing;
 }
+/* Pointer events never reach the controls, so it can't be dragged or paused by hover.
+   R3F sets pointer-events inline on its canvas wrapper, hence !important. */
+.viewer--static,
+.viewer--static * {
+  pointer-events: none !important;
+}
 .viewer__canvas {
   position: absolute;
   inset: 0;

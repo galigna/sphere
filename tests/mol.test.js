@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { ballStick } from '../src/mol/ballstick.js'
 import { formula } from '../src/mol/formula.js'
-import { mirrorPlane } from '../src/mol/mirror.js'
+import { mirrorPlanes, principalAxes } from '../src/mol/symmetry.js'
 import { LookupError, MESSAGES, loadMolecule } from '../src/mol/pubchem.js'
 import { parseSdf } from '../src/mol/sdf.js'
 
@@ -31,14 +31,30 @@ describe('parseSdf', () => {
   })
 })
 
-describe('mirrorPlane', () => {
-  it("finds a methane σd through C and two H's", () => {
+describe('mirrorPlanes', () => {
+  it("finds methane's six σd, each through C and two H's", () => {
     const { atoms } = parseSdf(fixture('methane'))
-    const { normal, up } = mirrorPlane(atoms)
+    const planes = mirrorPlanes(atoms)
+    expect(planes).toHaveLength(6)
     const c = atoms[0].pos
-    const offPlane = atoms.map((a) => Math.abs(a.pos.reduce((s, v, i) => s + (v - c[i]) * normal[i], 0)))
-    expect(offPlane.filter((d) => d < 0.01)).toHaveLength(3)
-    expect(Math.abs(up.reduce((s, v, i) => s + v * normal[i], 0))).toBeLessThan(1e-9)
+    for (const { normal, up } of planes) {
+      const offPlane = atoms.map((a) => Math.abs(a.pos.reduce((s, v, i) => s + (v - c[i]) * normal[i], 0)))
+      expect(offPlane.filter((d) => d < 0.01)).toHaveLength(3)
+      expect(Math.abs(up.reduce((s, v, i) => s + v * normal[i], 0))).toBeLessThan(1e-9)
+    }
+  })
+})
+
+describe('principalAxes', () => {
+  it("finds methane's four C₃, one along each C–H", () => {
+    const { atoms } = parseSdf(fixture('methane'))
+    const axes = principalAxes(atoms)
+    expect(axes).toHaveLength(4)
+    const c = atoms[0].pos
+    for (const h of atoms.slice(1)) {
+      const ch = h.pos.map((v, i) => (v - c[i]) / dist(h.pos, c))
+      expect(axes.some((k) => Math.abs(k.reduce((s, v, i) => s + v * ch[i], 0)) > 0.999)).toBe(true)
+    }
   })
 })
 

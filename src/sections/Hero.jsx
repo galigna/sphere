@@ -7,7 +7,7 @@ export default function Hero() {
   useEffect(() => void loadMolecule('methane').then(setMethane), [])
   return (
     <section className="hero" id="top">
-      <Viewer className="hero__viewer" molecule={methane} ring label="3D model of methane, CH₄" />
+      <Viewer className="hero__viewer" molecule={methane} symmetry interactive={false} label="3D model of methane, CH₄" />
       <div className="hero__text">
         <h1 className="display">Sphere</h1>
         <p className="body-l">
