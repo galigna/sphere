@@ -16,12 +16,24 @@ export const STEPS = [
 ]
 
 // Photos still to come: add { src, alt } and the tile shows the image.
-export const PROTOTYPES = [{}, {}, {}, {}, {}, {}, {}]
+const media = (name) => `${import.meta.env.BASE_URL}prototypes/${name}`
+
+// `video` items are silent loops (like GIFs, at a 20th of the size); `src` is their poster.
+export const PROTOTYPES = [
+  { src: media('water.jpg'), alt: 'A printed water molecule, red oxygen and blue hydrogens, on a clear symmetry rod' },
+  { src: media('water-symmetry.jpg'), video: media('water-symmetry.mp4'), alt: 'Hands taking apart and rejoining the water puzzle pieces' },
+  { src: media('molecule.jpg'), alt: 'A grey printed molecule with rings and methyl groups, held in one hand' },
+  { src: media('mof.jpg'), video: media('mof.mp4'), alt: 'A team member turning a printed metal–organic framework lattice' },
+  { src: media('cif.jpg'), alt: 'A clear resin crystal lattice printed from a CIF file, held in one hand' },
+  { src: media('printing.jpg'), alt: 'A clear resin print with its supports on the printer platform' },
+  { src: media('printing-loop.jpg'), video: media('printing.mp4'), alt: 'Resin prints curing under blue light' },
+]
 
 export const TEAM = [
   {
     name: 'Mariia Novikova',
     role: 'Co-founder & CEO',
+    photo: `${import.meta.env.BASE_URL}team/mariia.jpg`,
     bio: "Studies crystallography at Lake Forest College and takes part in MIT's MICRO program. Leads the science behind the project.",
   },
   {
