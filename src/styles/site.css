@@ -121,6 +121,8 @@ button, input {
   border-radius: var(--radius-full);
   background: var(--color-surface-glass);
   text-decoration: none;
+}
+.btn, .chip {
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -488,10 +490,15 @@ button, input {
   box-shadow: var(--glow-accent);
 }
 .step__body {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-2);
+}
+/* Side by side, the statuses line up along the bottom. */
+.step__body .status {
+  margin-top: auto;
 }
 .step__body .body-m {
   color: var(--color-text-secondary);
