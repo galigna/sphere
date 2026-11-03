@@ -590,7 +590,10 @@ button, input {
   font: 700 29cqi / 1 var(--font-serif);
   letter-spacing: -0.02em;
   text-align: center;
-  opacity: 0.75;
+  /* Fades towards the cut, so the word sits back. */
+  background: linear-gradient(var(--primitive-white-a60), var(--primitive-white-a10));
+  background-clip: text;
+  color: transparent;
 }
 
 /* Tablet */
