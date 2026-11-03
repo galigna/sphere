@@ -590,6 +590,7 @@ button, input {
   font: 700 29cqi / 1 var(--font-serif);
   letter-spacing: -0.02em;
   text-align: center;
+  opacity: 0.75;
 }
 
 /* Tablet */

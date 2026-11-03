@@ -39,7 +39,7 @@ export const TEAM = [
   {
     name: 'Galina Ignatova',
     role: 'Co-founder & CTO',
-    bio: 'ITMO University graduate. Wrote molkit, the software that turns molecules into puzzle pieces, and designs the kit and interactive UX.',
+    bio: 'ITMO University graduate. Wrote molkit, the software that turns molecules into puzzle pieces, and designs the kit and interactive learning platform.',
   },
 ]
 

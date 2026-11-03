@@ -10,7 +10,10 @@ export default function Problem() {
           but each one has to be designed by hand in CAD software, so few teachers can make them.
         </p>
       </section>
-      <p className="tagline h3">Pick a molecule. Print the pieces. Build it in class.</p>
+      {/* Lines break only between sentences. */}
+      <p className="tagline h3">
+        Pick&nbsp;a&nbsp;molecule. Print&nbsp;the&nbsp;pieces. Build&nbsp;it&nbsp;in&nbsp;class.
+      </p>
     </>
   )
 }
