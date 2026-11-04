@@ -15,9 +15,9 @@ export default function App() {
       <Header />
       <main className="content">
         <Hero />
+        <Prototypes />
         <Problem />
         <HowItWorks />
-        <Prototypes />
         <Team />
         <Goals />
         <Contact />
