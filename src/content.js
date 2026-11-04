@@ -38,6 +38,7 @@ export const TEAM = [
   {
     name: 'Galina Ignatova',
     role: 'Co-founder & CTO',
+    photo: `${import.meta.env.BASE_URL}team/galina.jpg`,
     bio: 'ITMO University graduate. Wrote molkit, the software that turns molecules into puzzle pieces, and designs the kit and interactive learning platform.',
   },
 ]
