@@ -20,7 +20,7 @@ body {
   color: var(--color-text-primary);
   background-color: var(--color-bg-page);
   background-image:
-    radial-gradient(circle, var(--primitive-white-a15) 1px, transparent 1.5px),
+    /* radial-gradient(circle, var(--primitive-white-a15) 1px, transparent 1.5px), */
     radial-gradient(120% 70% at 30% 0%, var(--color-bg-page-top), var(--color-bg-page) 76%);
   background-size: 28px 28px, 100% 100%;
   font: var(--type-body-m) / 1.5 var(--font-mono);
