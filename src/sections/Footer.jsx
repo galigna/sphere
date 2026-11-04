@@ -1,4 +1,4 @@
-import { PROJECT_LINKS, SECTIONS } from '../content.js'
+import { PROJECT_LINKS } from '../content.js'
 
 export default function Footer() {
   return (
@@ -9,10 +9,6 @@ export default function Footer() {
           <p className="body-s">3D-printed puzzles of real molecules for chemistry classrooms.</p>
         </div>
         <nav className="footer__links" aria-label="Footer">
-          <div>
-            <p className="overline">Sections</p>
-            {SECTIONS.map(([id, text]) => <a key={id} href={`#${id}`}>{text}</a>)}
-          </div>
           <div>
             <p className="overline">Project</p>
             {PROJECT_LINKS.map(([text, href]) => <a key={text} href={href}>{text}</a>)}

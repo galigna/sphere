@@ -16,7 +16,7 @@ Source of truth for layout and copy: Figma file `sr9U4FBdxBzHXYZVrpBRLh` ("Landi
 
 ## 2. Scope
 
-- The page as designed: header, hero, The problem, How it works, Physical prototypes, Team,
+- The page as designed: header, hero, Physical prototypes, The problem, How it works, Team,
   Our goals, Contact, footer.
 - Two live 3D viewers built with **Three.js**:
   - **Hero:** methane, slowly rotating on its own; not draggable, no "drag to rotate" hint.
@@ -65,12 +65,15 @@ Content is centred with `max-width: var(--layout-content-width)` and
 `padding-inline: var(--layout-gutter)`. Fixed frame widths are not reproduced.
 
 **Text styles:** Display, Heading/H1–H3, Body/L, Body/L Strong, Body/M, Body/S, Caption,
-Overline. Fonts are IBM Plex Serif Bold (headings) and IBM Plex Mono Regular/Bold (everything
-else), self-hosted woff2 files limited to the Latin subset.
+Overline. Fonts are IBM Plex Serif Bold (headings), IBM Plex Sans Regular/Bold (body) and IBM Plex
+Mono Regular (captions, overlines, chips and other small labels), self-hosted woff2 files limited
+to the Latin subset.
 
 **Effects:**
-- Glow/Accent is the focus ring. It is used as `:focus-visible` on the buttons and the molecule input.
-- Glow/Section is the background glow behind sections.
+- Focus ring is a flat 2px ring, used as `:focus-visible` on the buttons and the molecule input.
+  Nothing on the page glows.
+- The page background is the top gradient plus three soft washes (`color/bg/tint-blue`, `tint-violet`)
+  placed down the page. There is no dot grid.
 - Blur/Carousel edge is a mask on the right 32% of the prototype row:
   `mask-image: linear-gradient(to right, #000 68%, transparent)`. A real backdrop blur over
   scrolling images costs too much for what it adds.
@@ -81,6 +84,7 @@ modifier classes or element states.
 | Figma | Code |
 |---|---|
 | Button (Default, Hover, Focus) | `.btn` with `:hover` and `:focus-visible` |
+| Nav | `.header__nav` from 1200px: every section in page order, in one liquid-glass capsule (`backdrop-filter`, Glass/Nav). Sticky; hides on scroll down and returns on scroll up, or on keyboard focus. |
 | Header / Compact + icon/menu | `.header` below 1200px. The menu button opens a dropdown of section links: `<details>`, or a button with `aria-expanded`. |
 | Molecule viewer | `<MoleculeViewer>`: the R3F canvas plus the "drag to rotate" hint |
 | Molecule input (Default, Focus, Hover, Filled, Loading, Error) | `<form class="mol-input" data-state="…">` |

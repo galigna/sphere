@@ -11,7 +11,7 @@ import Team from './sections/Team.jsx'
 export default function App() {
   return (
     <>
-      <a className="skip" href="#problem">Skip to content</a>
+      <a className="skip" href="#prototypes">Skip to content</a>
       <Header />
       <main className="content">
         <Hero />

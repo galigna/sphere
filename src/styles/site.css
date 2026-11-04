@@ -19,11 +19,13 @@ body {
   margin: 0;
   color: var(--color-text-primary);
   background-color: var(--color-bg-page);
+  /* Soft washes, so the page doesn't go flat dark below the fold. */
   background-image:
-    /* radial-gradient(circle, var(--primitive-white-a15) 1px, transparent 1.5px), */
+    radial-gradient(circle max(55vw, 420px) at 5% 52%, var(--color-bg-tint-blue), transparent),
+    radial-gradient(circle max(55vw, 420px) at 95% 71%, var(--color-bg-tint-violet), transparent),
+    radial-gradient(circle max(55vw, 420px) at 30% 92%, var(--color-bg-tint-blue), transparent),
     radial-gradient(120% 70% at 30% 0%, var(--color-bg-page-top), var(--color-bg-page) 76%);
-  background-size: 28px 28px, 100% 100%;
-  font: var(--type-body-m) / 1.5 var(--font-mono);
+  font: var(--type-body-m) / 1.5 var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -47,7 +49,7 @@ button, input {
 
 :focus-visible {
   outline: none;
-  box-shadow: var(--glow-accent);
+  box-shadow: var(--focus-ring);
 }
 
 /* Text styles */
@@ -63,6 +65,9 @@ button, input {
 .body-m { font-size: var(--type-body-m); line-height: 1.5; }
 .body-s { font-size: var(--type-body-s); line-height: 1.5; }
 .caption { font-size: var(--type-caption); line-height: 1.4; }
+.caption, .overline, .chip, .status, .viewer__hint, .demo__caption {
+  font-family: var(--font-mono);
+}
 .overline {
   font-size: var(--type-overline);
   line-height: 1.4;
@@ -292,7 +297,6 @@ button, input {
 .tagline {
   padding-block: var(--space-12);
   text-align: center;
-  background: radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, var(--color-bg-glow) 70%, transparent), transparent);
 }
 
 /* How it works */
@@ -364,7 +368,7 @@ button, input {
 }
 .mol-input:focus-within {
   border-color: var(--color-border-accent);
-  box-shadow: var(--glow-accent);
+  box-shadow: var(--focus-ring);
 }
 .mol-input[data-state='error'] {
   border-color: var(--color-border-error);
@@ -487,7 +491,6 @@ button, input {
 .step[data-active] .step__dot {
   border-color: var(--color-accent-default);
   background: var(--color-accent-default);
-  box-shadow: var(--glow-accent);
 }
 .step__body {
   flex: 1;
@@ -646,15 +649,50 @@ button, input {
   .content, .header, .footer__top, .footer__bottom, .footer__wordmark {
     width: min(var(--layout-content-width), 100% - 2 * var(--space-12));
   }
+  html {
+    scroll-padding-top: 88px;
+  }
+  /* Rides up to sit near the top edge; only the buttons catch clicks, not the strip around them. */
   .header {
+    position: sticky;
+    top: calc(var(--space-4) - 46px);
+    z-index: 5;
     justify-content: center;
     padding-top: 46px;
+    pointer-events: none;
+    @media (prefers-reduced-motion: no-preference) {
+      transition: translate 0.3s ease;
+    }
+  }
+  /* Keyboard users still see where focus is. */
+  .header[data-hidden]:not(:has(:focus-visible)) {
+    translate: 0 -100%;
   }
   .header__brand, .header__menu {
     display: none;
   }
   .header__nav {
     display: flex;
+  }
+  .header__nav {
+    gap: var(--space-1);
+    padding: var(--space-1);
+    border: 1px solid var(--color-border-muted);
+    border-radius: var(--radius-full);
+    background:
+      linear-gradient(135deg, var(--primitive-white-a15), var(--primitive-white-a05)),
+      var(--color-surface-overlay);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+    box-shadow: var(--glass-nav);
+    pointer-events: auto;
+  }
+  .header__nav .btn {
+    border-color: transparent;
+    background: none;
+  }
+  .header__nav .btn:hover {
+    background: var(--color-surface-glass-hover);
   }
   .content {
     padding-top: 131px;
@@ -670,6 +708,7 @@ button, input {
   .how {
     flex-direction: row;
     align-items: flex-start;
+    gap: var(--space-22);
   }
   .how__text {
     flex: 1;

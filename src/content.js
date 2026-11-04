@@ -1,13 +1,11 @@
 export const SECTIONS = [
+  ['prototypes', 'Prototypes'],
   ['problem', 'The problem'],
   ['how', 'How it works'],
-  ['prototypes', 'Prototypes'],
   ['team', 'Team'],
   ['goals', 'Our goals'],
   ['contact', 'Contact'],
 ]
-
-export const NAV = ['problem', 'how', 'team', 'contact']
 
 export const STEPS = [
   ['Real data in', 'Any molecule from PubChem or a crystal structure file.'],
@@ -31,13 +29,13 @@ export const PROTOTYPES = [
 export const TEAM = [
   {
     name: 'Mariia Novikova',
-    role: 'Co-founder & CEO',
+    role: 'Science',
     photo: `${import.meta.env.BASE_URL}team/mariia.jpg`,
     bio: "Studies crystallography at Lake Forest College and takes part in MIT's MICRO program. Leads the science behind the project.",
   },
   {
     name: 'Galina Ignatova',
-    role: 'Co-founder & CTO',
+    role: 'Software and design',
     photo: `${import.meta.env.BASE_URL}team/galina.jpg`,
     bio: 'ITMO University graduate. Wrote molkit, the software that turns molecules into puzzle pieces, and designs the kit and interactive learning platform.',
   },
@@ -59,7 +57,7 @@ const MOLKIT = 'https://github.com/galigna/rhino-molkit'
 const EMAIL = 'novikovamst18@lakeforest.edu'
 
 export const CONTACTS = [
-  { icon: 'mail', label: 'Email Mariia (CEO)', value: EMAIL, href: `mailto:${EMAIL}` },
+  { icon: 'mail', label: 'Email Mariia', value: EMAIL, href: `mailto:${EMAIL}` },
   { icon: 'code', label: 'molkit source code (GitHub)', value: 'galigna/rhino-molkit', href: MOLKIT },
 ]
 
