@@ -15,8 +15,9 @@ export default function HowItWorks() {
             ))}
           </ol>
           <p className="body-l">
-            A printed kit needs no power, software or internet in class. Schools can get a ready-made kit or
-            ready-to-print files for a standard desktop 3D printer.
+            Models are generated ready to print, with no CAD knowledge needed, so a kit on any topic can be generated
+            with our library, molkit, and printed on a standard 3D printer. Custom plugins will add elements unique to
+            each topic, such as symmetry or proteins.
           </p>
         </div>
       </div>

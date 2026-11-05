@@ -7,10 +7,15 @@ export const SECTIONS = [
   ['contact', 'Contact'],
 ]
 
+export const REFERENCES = [
+  ['Penny et al. J. Chem. Educ. 2017, 94, 1265.', 'https://doi.org/10.1021/acs.jchemed.6b00953'],
+  ['Niece. J. Chem. Educ. 2019, 96, 2059.', 'https://doi.org/10.1021/acs.jchemed.9b00053'],
+]
+
 export const STEPS = [
-  ['Real data in', 'Any molecule from PubChem or a crystal structure file.'],
-  ['Puzzle out', 'One piece per atom, with pegs whose shapes match the bond type.'],
-  ['Students build it', 'They rebuild the molecule by hand and find its symmetry themselves.'],
+  ['Real data in', 'Any molecule from PubChem or a crystal structure file (CIF).'],
+  ['Puzzle out', 'One piece per atom, with pegs whose shapes match the bond type plus extra pieces for the topic, such as symmetry axes.'],
+  ['Students build it', 'They rebuild the molecule by hand and see patterns themselves.'],
 ]
 
 const media = (name) => `${import.meta.env.BASE_URL}prototypes/${name}`
@@ -37,7 +42,7 @@ export const TEAM = [
     name: 'Galina Ignatova',
     role: 'Software and design',
     photo: `${import.meta.env.BASE_URL}team/galina.jpg`,
-    bio: 'ITMO University graduate. Wrote molkit, the software that turns molecules into puzzle pieces, and designs the kit and interactive learning platform.',
+    bio: 'Designs and tests Sphere’s models and the software that generates them, molkit. Leads the development of the learning platform and AR app.',
   },
 ]
 
@@ -50,7 +55,7 @@ export const GOALS = [
     active: true,
   },
   { when: 'Next', title: 'Learning platform', text: 'A website with quizzes, tutorials and background for each kit.', status: 'planned' },
-  { when: 'Later', title: 'AR app', text: 'Used beside the kit: animate an inversion step or show facts about the molecule.', status: 'future' },
+  { when: 'Later', title: 'AR app', text: 'Used beside the kit: animate an inversion step and show facts about the molecule.', status: 'future' },
 ]
 
 const MOLKIT = 'https://github.com/galigna/rhino-molkit'

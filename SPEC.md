@@ -73,7 +73,11 @@ to the Latin subset.
 - Focus ring is a flat 2px ring, used as `:focus-visible` on the buttons and the molecule input.
   Nothing on the page glows.
 - The page background is the top gradient plus three soft washes (`color/bg/tint-blue`, `tint-violet`)
-  placed down the page. There is no dot grid.
+  placed down the page, under a faint white grain (Noise/Page, `--noise`: a tiled inline SVG).
+  There is no dot grid.
+- One wide, heavily blurred ribbon runs from behind the hero molecule across the title, behind the
+  content, from `color/bg/tint-lime` to `color/bg/tint-pink`, fading out at both ends. It scales with
+  the viewer. Figma's blur is progressive; the site uses one blur at about the average strength.
 - Blur/Carousel edge is a mask on the right 32% of the prototype row:
   `mask-image: linear-gradient(to right, #000 68%, transparent)`. A real backdrop blur over
   scrolling images costs too much for what it adds.
@@ -216,6 +220,9 @@ Copy matches the Figma desktop frame, section by section. Links:
 - Email Mariia: `mailto:novikovamst18@lakeforest.edu`.
 - molkit on GitHub and Releases point to `galigna/rhino-molkit`.
 - The footer credits PubChem.
+- The problem section cites its two J. Chem. Educ. references in short form (Body/XS, muted), each
+  linking to its DOI, with a thin muted rule on the left. They sit beside the body on desktop and
+  under it on smaller screens.
 
 Meta:
 - `<title>`: "Sphere: 3D-printed molecule puzzles".

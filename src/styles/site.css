@@ -19,14 +19,19 @@ body {
   margin: 0;
   color: var(--color-text-primary);
   background-color: var(--color-bg-page);
-  /* Soft washes, so the page doesn't go flat dark below the fold. */
+  /* Soft washes, so the page doesn't go flat dark below the fold. The grain also breaks up their banding. */
   background-image:
+    var(--noise),
     radial-gradient(circle max(55vw, 420px) at 5% 52%, var(--color-bg-tint-blue), transparent),
     radial-gradient(circle max(55vw, 420px) at 95% 71%, var(--color-bg-tint-violet), transparent),
     radial-gradient(circle max(55vw, 420px) at 30% 92%, var(--color-bg-tint-blue), transparent),
     radial-gradient(120% 70% at 30% 0%, var(--color-bg-page-top), var(--color-bg-page) 76%);
   font: var(--type-body-m) / 1.5 var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+/* The hero's tilted canvas and lime wash would otherwise widen the page on narrow screens. */
+#root {
+  overflow-x: clip;
 }
 
 h1, h2, h3, p, ol, ul, figure {
@@ -283,6 +288,25 @@ button, input {
 .hero__viewer {
   max-width: 470px;
 }
+/* A soft ribbon from behind the molecule across the title, sized to the viewer to stay anchored to it. */
+.hero__viewer::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.4%;
+  top: -46.3%;
+  width: 324%;
+  aspect-ratio: 1523 / 904;
+  opacity: 0.95;
+  background: linear-gradient(
+    to right,
+    transparent 20%,
+    var(--color-bg-tint-lime) 35%,
+    var(--color-bg-tint-pink) 60%,
+    transparent 80%
+  );
+  mask: url(./hero-flow.svg) center / 100% no-repeat;
+}
 /* Tilts the spin axis along with the model; the ring stays inside the canvas's inner circle. */
 .hero__viewer .viewer__canvas {
   rotate: 15deg;
@@ -300,6 +324,25 @@ button, input {
 }
 
 /* How it works */
+.problem__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-heading-gap);
+}
+.problem__refs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-left: var(--space-4);
+  border-left: 1px solid;
+  font-size: var(--type-caption);
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+.problem__refs a:hover {
+  color: var(--color-text-primary);
+}
+
 .how {
   gap: var(--space-12);
 }
@@ -607,7 +650,7 @@ button, input {
   letter-spacing: -0.02em;
   text-align: center;
   /* Fades towards the cut, so the word sits back. */
-  background: linear-gradient(var(--primitive-white-a60), var(--primitive-white-a10));
+  background: linear-gradient(var(--primitive-white-a60), var(--primitive-white-a05));
   background-clip: text;
   color: transparent;
 }
@@ -704,6 +747,17 @@ button, input {
   .hero__viewer {
     flex: none;
     width: 470px;
+  }
+  .problem__body {
+    flex-direction: row;
+    gap: var(--space-16);
+  }
+  .problem__body p {
+    flex: none;
+  }
+  /* Keeps the rule as tall as the citations, not the body text. */
+  .problem__refs {
+    align-self: flex-start;
   }
   .how {
     flex-direction: row;

@@ -23,6 +23,8 @@
   --color-bg-page-top: var(--primitive-ink-900);
   --color-bg-tint-blue: rgb(14 38 64 / 0.6);
   --color-bg-tint-violet: rgb(31 17 59 / 0.6);
+  --color-bg-tint-lime: rgb(163 230 53 / 0.1);
+  --color-bg-tint-pink: rgb(244 114 182 / 0.1);
   --color-surface-glass: var(--primitive-white-a05);
   --color-surface-glass-hover: var(--primitive-white-a10);
   --color-surface-overlay: var(--primitive-ink-950-a60);
@@ -88,6 +90,8 @@
     inset 0 1px 0 var(--primitive-white-a35),
     inset 0 -1px 0 var(--primitive-white-a10),
     0 8px 32px var(--primitive-ink-950-a60);
+  /* The filter region must match the tile, or stitchTiles leaves visible seams. */
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .15 0 0 0 -.054'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @media (min-width: 768px) {

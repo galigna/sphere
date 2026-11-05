@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="122 12 1523 904">
+  <filter id="soft" filterUnits="userSpaceOnUse" x="122" y="12" width="1523" height="904">
+    <feGaussianBlur stdDeviation="47"/>
+  </filter>
+  <g filter="url(#soft)">
+    <path transform="translate(422.08 311.83)" fill="none" stroke="#fff" stroke-width="225" stroke-linecap="round" stroke-linejoin="round" d="M0 233.79C4.1 258.4 45.12 295.31 102.54 303.51C159.96 307.62 200.98 278.91 213.28 205.08C213.28 172.27 196.87 139.45 176.37 110.74C217.38 143.55 283.01 168.16 356.84 172.27C393.75 172.27 418.36 139.45 415.9 90.23C434.76 110.74 471.68 139.45 529.1 139.45C586.52 143.55 643.94 106.64 664.45 0C693.16 57.42 750.58 123.05 816.21 164.06C865.43 196.87 906.44 213.28 922.85 217.38"/>
+  </g>
+</svg>
