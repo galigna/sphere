@@ -465,6 +465,16 @@ button, input {
 .carousel--end {
   --fade: 100%;
 }
+@media (hover: hover) {
+  .carousel {
+    cursor: grab;
+  }
+}
+.carousel--dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  user-select: none;
+}
 /* Registered so the gradient stop can animate; a mask-image swap can't. */
 @property --fade {
   syntax: '<percentage>';

@@ -81,6 +81,8 @@ to the Latin subset.
 - Blur/Carousel edge is a mask on the right 32% of the prototype row:
   `mask-image: linear-gradient(to right, #000 68%, transparent)`. A real backdrop blur over
   scrolling images costs too much for what it adds.
+- The prototype row can be dragged with a mouse, then glides to the nearest photo. Touch and touchpads
+  keep native scrolling.
 
 **Components → markup.** Each component is plain HTML plus a CSS class. Figma variants become
 modifier classes or element states.
