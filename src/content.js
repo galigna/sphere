@@ -36,7 +36,7 @@ export const TEAM = [
     name: 'Mariia Novikova',
     role: 'Science',
     photo: `${import.meta.env.BASE_URL}team/mariia.jpg`,
-    bio: "Studies crystallography at Lake Forest College and takes part in MIT's MICRO program. Leads the science behind the project.",
+    bio: "Studies chemistry at Lake Forest College and takes part in MIT's MICRO program. Leads the science behind the project.",
   },
   {
     name: 'Galina Ignatova',
