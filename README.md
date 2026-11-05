@@ -1,6 +1,6 @@
 # Sphere
 
-Landing page for Sphere: 3D-printed puzzles of real molecules for chemistry classrooms.
+Landing page for Sphere: 3D-printed molecular kits for chemistry classrooms.
 Live at https://galigna.github.io/sphere/.
 
 Type a molecule name and the page fetches its 3D structure from PubChem and renders it the way

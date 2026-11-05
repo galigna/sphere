@@ -2,7 +2,7 @@
 
 ## 1. Goal
 
-A one-page site for **Sphere**: 3D-printed puzzles of real molecules for chemistry classrooms.
+A one-page site for **Sphere**: 3D-printed molecular kits for chemistry classrooms.
 It is the proof-point link in the MIT Solve 2027 application (deadline **6 Nov 2026, 12:00 ET**),
 so it must load fast, work on a phone, and show the idea in one interaction:
 

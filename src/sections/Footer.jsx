@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="footer__top">
         <div className="footer__brand">
           <p className="h3">Sphere</p>
-          <p className="body-s">3D-printed puzzles of real molecules for chemistry classrooms.</p>
+          <p className="body-s">3D-printed molecular kits for chemistry classrooms.</p>
         </div>
         <nav className="footer__links" aria-label="Footer">
           <div>
